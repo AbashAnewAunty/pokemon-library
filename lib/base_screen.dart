@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokemon_library/views/favorite_page.dart';
 import 'package:pokemon_library/views/home_page.dart';
+import 'package:pokemon_library/views/login_page.dart';
+
+import 'models/repositories/user_repository.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({Key? key}) : super(key: key);
@@ -15,7 +19,28 @@ class _BaseScreenState extends State<BaseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Pokemon Library")),
+      appBar: AppBar(
+        title: const Text("Pokemon Library"),
+        actions: [
+          Consumer(builder: (context, ref, _) {
+            final user = ref.watch(authControllerProvider);
+
+            return GestureDetector(
+              onTap: () {
+                Navigator.of(context, rootNavigator: true)
+                    .push(MaterialPageRoute(builder: (_) => LoginPage()));
+              },
+              child: SizedBox(
+                width: 100,
+                height: 100,
+                child: user != null
+                    ? const Icon(Icons.person)
+                    : const Icon(Icons.person_outline),
+              ),
+            );
+          })
+        ],
+      ),
       body: Row(
         children: [
           NavigationRail(
@@ -29,7 +54,7 @@ class _BaseScreenState extends State<BaseScreen> {
                 label: Text("Favorite"),
               ),
             ],
-            onDestinationSelected: (index){
+            onDestinationSelected: (index) {
               setState(() {
                 _selectedIndex = index;
               });
