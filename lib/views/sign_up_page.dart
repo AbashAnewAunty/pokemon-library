@@ -58,6 +58,23 @@ class SignUpPage extends ConsumerWidget {
                     email: _mailTextController.text,
                     password: _passwordController.text,
                   );
+
+                  await authController.verifyEmail();
+
+                  await showDialog(
+                    context: context,
+                    builder: (_) {
+                      return ConstrainedBox(
+                        constraints: BoxConstraints(maxWidth: 600),
+                        child: AlertDialog(
+                          content: Text(
+                              "ご指定のアドレスに認証メールを送信しました。メール内に記載されているリンクから認証を完了させてください。"
+                              "もしメールが届いていない場合、下のverification email をから認証メールを再送信してください"),
+                        ),
+                      );
+                    },
+                  );
+
                   await authController.signIn(
                     email: _mailTextController.text,
                     password: _passwordController.text,
