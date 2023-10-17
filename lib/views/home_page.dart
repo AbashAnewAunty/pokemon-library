@@ -26,7 +26,7 @@ class HomePage extends ConsumerWidget {
                 final pokemon = data[index];
                 return GestureDetector(
                   onTap: () {
-                    Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                    Navigator.of(context).push(MaterialPageRoute(
                         builder: (_) => PokemonDetailPage(pokemon: pokemon)));
                   },
                   child: Container(
