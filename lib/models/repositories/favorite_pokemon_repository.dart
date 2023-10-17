@@ -12,15 +12,18 @@ class FavoritePokemonNotifier extends StateNotifier<List<Pokemon>> {
       return;
     }
 
-    state.add(pokemon);
+    /// NOTE: state.add(~) の書き方ではviewに変更が反映されない
+    state = [...state, pokemon];
   }
 
   void removePokemonId(int pokemonId){
-    state.removeWhere((element) => element.id == pokemonId);
+    /// NOTE: state.removeWhere(~) の書き方ではviewに変更が反映されない
+    state = state.where((element) => element.id != pokemonId).toList();
   }
 
   void reset(){
-    state.clear();
+    /// NOTE: state.clear() の書き方ではviewに変更が反映されない
+    state = [];
   }
 
 
