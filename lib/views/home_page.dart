@@ -21,7 +21,7 @@ class HomePage extends ConsumerWidget {
           data: (data) {
             return GridView.builder(
               gridDelegate: _gridViewDelegate(),
-              itemCount: 151,
+              itemCount: data.length,
               itemBuilder: (_, index) {
                 final pokemon = data[index];
                 return GestureDetector(
