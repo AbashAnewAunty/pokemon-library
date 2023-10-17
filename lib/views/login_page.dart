@@ -43,15 +43,39 @@ class LoginPage extends ConsumerWidget {
               const SizedBox(height: 50),
 
               /// メールアドレス入力
-              TextField(
-                decoration: const InputDecoration(
-                  label: Text('E-mail'),
+              if (user == null)
+                TextField(
+                  decoration: const InputDecoration(
+                    label: Text('E-mail'),
+                  ),
+                  controller: _mailTextController,
                 ),
-                controller: _mailTextController,
-              ),
 
               /// パスワード入力
-              PasswordTextField(textEditingController: _passwordController),
+              if (user == null)
+                PasswordTextField(textEditingController: _passwordController),
+              if (user != null)
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text("User ID (FirebathAuth): ${user.uid}"),
+                ),
+              if (user != null)
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text("Login Email: ${user.email}"),
+                ),
+              if (user != null && user.providerData.isNotEmpty)
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child:
+                      Text("Login by: ${user.providerData.first.providerId}"),
+                ),
+              if (user != null && user.providerData.isNotEmpty)
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child:
+                  Text("Email verified: ${user.emailVerified}"),
+                ),
               const SizedBox(height: 50),
               ElevatedButton(
                 onPressed: () async {
@@ -68,13 +92,14 @@ class LoginPage extends ConsumerWidget {
                     user != null ? const Text("Log out") : const Text("Login"),
               ),
               const SizedBox(height: 50),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => SignUpPage()));
-                },
-                child: const Text("アカウントが無い方はこちらから"),
-              ),
+              if (user == null)
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (_) => SignUpPage()));
+                  },
+                  child: const Text("アカウントが無い方はこちらから"),
+                ),
               const SizedBox(height: 50),
               if (user != null)
                 ElevatedButton(
