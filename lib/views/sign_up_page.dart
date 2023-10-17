@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pokemon_library/views/sign_up_page.dart';
+import 'package:pokemon_library/models/repositories/user_repository.dart';
 import 'package:pokemon_library/views/views_common/password_text_field.dart';
 
-import '../models/repositories/user_repository.dart';
-
-class LoginPage extends ConsumerWidget {
-  LoginPage({Key? key}) : super(key: key);
+class SignUpPage extends ConsumerWidget {
+  SignUpPage({Key? key}) : super(key: key);
 
   final TextEditingController _mailTextController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -23,13 +21,10 @@ class LoginPage extends ConsumerWidget {
           child: Column(
             children: [
               AppBar(
-                title: const Text("Login"),
+                title: const Text("SignUp"),
                 actions: [
                   GestureDetector(
-                    onTap: () {
-                      Navigator.of(context, rootNavigator: true)
-                          .push(MaterialPageRoute(builder: (_) => LoginPage()));
-                    },
+                    onTap: () {},
                     child: SizedBox(
                       width: 100,
                       height: 100,
@@ -56,33 +51,27 @@ class LoginPage extends ConsumerWidget {
               ElevatedButton(
                 onPressed: () async {
                   if (user != null) {
-                    await authController.signOut();
-                  } else {
-                    await authController.signIn(
-                      email: _mailTextController.text,
-                      password: _passwordController.text,
-                    );
+                    return;
                   }
+
+                  await authController.signUp(
+                    email: _mailTextController.text,
+                    password: _passwordController.text,
+                  );
+                  await authController.signIn(
+                    email: _mailTextController.text,
+                    password: _passwordController.text,
+                  );
                 },
-                child:
-                    user != null ? const Text("Log out") : const Text("Login"),
+                child: Text(user != null ? "complete signup !" : "signUp"),
               ),
               const SizedBox(height: 50),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => SignUpPage()));
+              ElevatedButton(
+                onPressed: () async {
+                  await authController.verifyEmail();
                 },
-                child: const Text("アカウントが無い方はこちらから"),
+                child: const Text("email verification"),
               ),
-              const SizedBox(height: 50),
-              if (user != null)
-                ElevatedButton(
-                  onPressed: () async {
-                    await authController.deleteAccount();
-                  },
-                  child: const Text("delete account"),
-                ),
             ],
           ),
         ),
