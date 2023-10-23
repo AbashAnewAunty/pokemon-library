@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokemon_library/views/sign_up_page.dart';
 import 'package:pokemon_library/views/views_common/password_text_field.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../models/repositories/user_repository.dart';
 
@@ -100,6 +101,13 @@ class LoginPage extends ConsumerWidget {
                   },
                   child: const Text("アカウントが無い方はこちらから"),
                 ),
+              const SizedBox(height: 50),
+              TextButton(
+                onPressed: () {
+                  launchUrl(Uri.parse("https://hogehogehoga.auth.us-east-1.amazoncognito.com/oauth2/authorize?client_id=7ihbbu2mvi78efu0g57epsobpa&response_type=code&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fpokomon-library.web.app"));
+                },
+                child: const Text("cognitoを用いたアカウント作成はこちら？"),
+              ),
               const SizedBox(height: 50),
               if (user != null)
                 ElevatedButton(
