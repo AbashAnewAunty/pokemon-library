@@ -11,7 +11,7 @@ final pokemonRepositoryProvider = FutureProvider<List<Pokemon>>((ref) async {
     apiManager: ref.read(apiManagerProvider),
     prefManager: ref.read(prefManagerProvider),
   );
-  await pokemonRepository.fetchPokemonList(startId: 1, lastId: 151);
+  await pokemonRepository.fetchPokemonList(startId: 1, lastId: 26);
   return pokemonRepository.pokemonList;
 });
 
