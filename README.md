@@ -21,5 +21,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ## How To Deploy
 
+```
 $ flutter build web
 $ firebase deploy
+```
