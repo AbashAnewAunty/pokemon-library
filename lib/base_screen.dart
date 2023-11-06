@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pokemon_library/views/favorite_page.dart';
 import 'package:pokemon_library/views/home_page.dart';
 import 'package:pokemon_library/views/login_page.dart';
 
 import 'models/repositories/user_repository.dart';
 
-class BaseScreen extends StatefulWidget {
-  const BaseScreen({Key? key}) : super(key: key);
+class BaseScreen extends StatelessWidget {
+  final Widget child;
+  final int currentIndex;
 
-  @override
-  State<BaseScreen> createState() => _BaseScreenState();
-}
-
-class _BaseScreenState extends State<BaseScreen> {
-  int _selectedIndex = 0;
+  const BaseScreen({
+    super.key,
+    required this.child,
+    required this.currentIndex,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -55,13 +56,23 @@ class _BaseScreenState extends State<BaseScreen> {
               ),
             ],
             onDestinationSelected: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
+              switch (index) {
+                case 0:
+                  GoRouter.of(context).go("/list");
+                  break;
+                case 1:
+                  GoRouter.of(context).go("/favorite");
+                  break;
+                default:
+                  GoRouter.of(context).go("/list");
+                  break;
+              }
             },
-            selectedIndex: _selectedIndex,
+            selectedIndex: currentIndex,
           ),
-          Expanded(child: _selectedIndex == 0 ? HomePage() : FavoritePage()),
+          Expanded(
+            child: child,
+          ),
         ],
       ),
     );

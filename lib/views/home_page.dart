@@ -1,6 +1,9 @@
+import 'dart:js_interop';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pokemon_library/data_models/pokemon.dart';
 import 'package:pokemon_library/models/repositories/pokemon_repository.dart';
 import 'package:pokemon_library/views/pokemon_detail_page.dart';
@@ -26,8 +29,7 @@ class HomePage extends ConsumerWidget {
                 final pokemon = data[index];
                 return GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) => PokemonDetailPage(pokemon: pokemon)));
+                    GoRouter.of(context).go("/list/detail", extra: pokemon);
                   },
                   child: Container(
                     decoration: BoxDecoration(
