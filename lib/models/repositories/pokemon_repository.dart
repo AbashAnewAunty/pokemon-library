@@ -1,10 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pokemon_library/domain/entity/pokemon.dart';
 import 'package:pokemon_library/models/managers/api_manager.dart';
 import 'package:pokemon_library/models/managers/pref_manager.dart';
-
-import '../../data_models/pokemon.dart';
 
 final pokemonRepositoryProvider = FutureProvider<List<Pokemon>>((ref) async {
   final pokemonRepository = PokemonRepository(
@@ -65,8 +64,7 @@ class PokemonRepository {
       print("APIレスポンスをキャッシュに保存");
     }
 
-
-    if(tempList.isEmpty){
+    if (tempList.isEmpty) {
       return;
     }
     _pokemonList.addAll(tempList);

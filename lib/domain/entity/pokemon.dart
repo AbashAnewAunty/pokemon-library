@@ -1,5 +1,5 @@
-import '../enum.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pokemon_library/enum.dart';
 
 part 'pokemon.freezed.dart';
 
@@ -22,6 +22,5 @@ class Pokemon with _$Pokemon {
     required List<PokeType> types,
   }) = _Pokemon;
 
-  factory Pokemon.fromJson(Map<String, dynamic> json) =>
-      _$PokemonFromJson(json);
+  factory Pokemon.fromJson(Map<String, dynamic> json) => _$PokemonFromJson(json);
 }

@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pokemon_library/data_models/pokemon.dart';
+import 'package:pokemon_library/domain/entity/pokemon.dart';
 import 'package:pokemon_library/models/repositories/pokemon_repository.dart';
 import 'package:pokemon_library/views/views_common/my_loading_indicator.dart';
 

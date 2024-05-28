@@ -1,7 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-
-import '../../data_models/pokemon.dart';
+import 'package:pokemon_library/domain/entity/pokemon.dart';
 
 class MyRadarCart extends StatelessWidget {
   const MyRadarCart({
@@ -38,11 +37,9 @@ class MyRadarCart extends StatelessWidget {
               case 2:
                 return RadarChartTitle(text: 'Defense \n${pokemon.defense}');
               case 3:
-                return RadarChartTitle(
-                    text: 'SpecialAttack \n${pokemon.specialAttack}');
+                return RadarChartTitle(text: 'SpecialAttack \n${pokemon.specialAttack}');
               case 4:
-                return RadarChartTitle(
-                    text: 'SpecialDefense \n${pokemon.specialDefense}');
+                return RadarChartTitle(text: 'SpecialDefense \n${pokemon.specialDefense}');
               case 5:
                 return RadarChartTitle(text: 'Speed \n${pokemon.speed}');
               default:
@@ -55,8 +52,7 @@ class MyRadarCart extends StatelessWidget {
           ticksTextStyle: const TextStyle(color: Colors.black38, fontSize: 10),
           tickBorderData: BorderSide(color: Colors.redAccent.withOpacity(0.5)),
           tickCount: 2,
-          gridBorderData:
-              BorderSide(color: Colors.grey.withOpacity(0.3), width: 2),
+          gridBorderData: BorderSide(color: Colors.grey.withOpacity(0.3), width: 2),
         ),
       ),
     );

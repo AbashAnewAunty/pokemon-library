@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pokemon_library/base_screen.dart';
-import 'package:pokemon_library/data_models/pokemon.dart';
+import 'package:pokemon_library/domain/entity/pokemon.dart';
 import 'package:pokemon_library/views/favorite_page.dart';
 import 'package:pokemon_library/views/home_page.dart';
 import 'package:pokemon_library/views/pokemon_detail_page.dart';

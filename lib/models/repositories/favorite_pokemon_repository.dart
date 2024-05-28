@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pokemon_library/data_models/pokemon.dart';
+import 'package:pokemon_library/domain/entity/pokemon.dart';
 
-final favoritePokemonNotifierProvider = StateNotifierProvider<FavoritePokemonNotifier, List<Pokemon>>((ref) => FavoritePokemonNotifier());
+final favoritePokemonNotifierProvider =
+    StateNotifierProvider<FavoritePokemonNotifier, List<Pokemon>>((ref) => FavoritePokemonNotifier());
 
 class FavoritePokemonNotifier extends StateNotifier<List<Pokemon>> {
-
   FavoritePokemonNotifier() : super([]);
 
   void addPokemon(Pokemon pokemon) {
@@ -16,15 +16,13 @@ class FavoritePokemonNotifier extends StateNotifier<List<Pokemon>> {
     state = [...state, pokemon];
   }
 
-  void removePokemonId(int pokemonId){
+  void removePokemonId(int pokemonId) {
     /// NOTE: state.removeWhere(~) の書き方ではviewに変更が反映されない
     state = state.where((element) => element.id != pokemonId).toList();
   }
 
-  void reset(){
+  void reset() {
     /// NOTE: state.clear() の書き方ではviewに変更が反映されない
     state = [];
   }
-
-
 }
