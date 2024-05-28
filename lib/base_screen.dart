@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pokemon_library/views/favorite_page.dart';
-import 'package:pokemon_library/views/home_page.dart';
 import 'package:pokemon_library/views/login_page.dart';
 
 import 'models/repositories/user_repository.dart';
@@ -28,15 +26,12 @@ class BaseScreen extends StatelessWidget {
 
             return GestureDetector(
               onTap: () {
-                Navigator.of(context, rootNavigator: true)
-                    .push(MaterialPageRoute(builder: (_) => LoginPage()));
+                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (_) => LoginPage()));
               },
               child: SizedBox(
                 width: 100,
                 height: 100,
-                child: user != null
-                    ? const Icon(Icons.person)
-                    : const Icon(Icons.person_outline),
+                child: user != null ? const Icon(Icons.person) : const Icon(Icons.person_outline),
               ),
             );
           })

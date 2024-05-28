@@ -1,12 +1,9 @@
-import 'dart:js_interop';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pokemon_library/data_models/pokemon.dart';
 import 'package:pokemon_library/models/repositories/pokemon_repository.dart';
-import 'package:pokemon_library/views/pokemon_detail_page.dart';
 import 'package:pokemon_library/views/views_common/my_loading_indicator.dart';
 
 class HomePage extends ConsumerWidget {
@@ -14,8 +11,7 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<List<Pokemon>> pokemonRepository =
-        ref.watch(pokemonRepositoryProvider);
+    final AsyncValue<List<Pokemon>> pokemonRepository = ref.watch(pokemonRepositoryProvider);
 
     return Center(
       child: Container(
@@ -42,10 +38,8 @@ class HomePage extends ConsumerWidget {
                           tag: pokemon.name,
                           child: CachedNetworkImage(
                             imageUrl: pokemon.spriteUrlFrontDefault,
-                            placeholder: (context, url) =>
-                                const MyLoadingIndicator(),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
+                            placeholder: (context, url) => const MyLoadingIndicator(),
+                            errorWidget: (context, url, error) => const Icon(Icons.error),
                           ),
                         ),
                         Text("No.${pokemon.id} ${pokemon.name}"),
