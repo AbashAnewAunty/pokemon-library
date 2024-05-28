@@ -4,6 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pokemon_library/base_screen.dart';
 import 'package:pokemon_library/domain/entity/pokemon.dart';
+import 'package:pokemon_library/domain/repository/pokemon_repository.dart';
+import 'package:pokemon_library/domain/repository/pokemon_repository_provider.dart';
+import 'package:pokemon_library/infrastracture/repository/pokemon_repository_impl.dart';
+import 'package:pokemon_library/models/managers/api_manager.dart';
 import 'package:pokemon_library/views/favorite_page.dart';
 import 'package:pokemon_library/views/home_page.dart';
 import 'package:pokemon_library/views/pokemon_detail_page.dart';
@@ -80,6 +84,12 @@ class RouteApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
+      overrides: [
+        pokemonRepositoryProvider.overrideWith((ref) {
+          final apiManager = ref.read(apiManagerProvider);
+          return PokemonRepositoryImpl(apiManager: apiManager);
+        }),
+      ],
       child: MaterialApp.router(
         title: 'Flutter Demo',
         theme: ThemeData(
